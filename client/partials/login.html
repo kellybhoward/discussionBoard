@@ -1,0 +1,23 @@
+<div ng-controller="LoginController">
+    <div class="main_image center-align">
+        <img src="/images/title.gif" alt=""/>
+    </div>
+    <div class="container">
+        <div class="login row card">
+            <div class="col s12 m8 offset-m2">
+                <h5 class="center-align text_theme_dark">Hello!</h5>
+                <p class="center-align text_theme_dark"><span ng-bind="errMessage"></span></p>
+                <div class="row">
+                    <div class="col s12 m6 offset-m3">
+                        <form>
+                            <input ng-model="credentials.newName" id="newUser" type="text"  placeholder="create username"/>
+                            <p class="center-align text_theme_dark">If you already have a username, enter here:</p>
+                            <input ng-model="credentials.name" id="newUser" type="text"  placeholder="your username"/>
+                            <input id="login" class="btn theme_color" type="submit" ng-click="login()" value="Enter" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

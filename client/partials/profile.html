@@ -1,0 +1,17 @@
+<div class="container" ng-controller="ProfileController">
+    <div class="row">
+        <a href="#/dashboard"><img class="left logo" src="/images/title.gif" alt="" /></a>
+        <ul class="right top_space">
+            <li class="inline"><a class="text_theme" href="" ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="card-panel">
+        <h5 class="text_theme_dark">Username: <span ng-bind="profile.name"></span></h5>
+        <h6>Activity:</h6>
+        <ul>
+            <li class="indent">Topics: <span class="text_theme" ng-bind="profile.topicCount"></span></li>
+            <li class="indent">Posts: <span class="text_theme" ng-bind="profile.postCount"></span></li>
+            <li class="indent">Comments: <span class="text_theme" ng-bind="profile.commentCount"></span></li>
+        </ul>
+    </div>
+</div>

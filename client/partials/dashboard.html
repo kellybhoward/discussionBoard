@@ -1,0 +1,78 @@
+<div class="container" ng-controller="DashboardController">
+    <div class="row">
+        <a href="#/dashboard"><img class="left logo" src="/images/title.gif" alt="" /></a>
+        <ul class="right top_space">
+            <li class="inline"><a class="text_theme" href="" ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <h5 class="center-align">Welcome <span ng-bind="userName"></span>!</h5>
+    </div>
+    <div class="row"><!-- topic filter -->
+        <div class="col s6 offset-s6 m3 offset-m9">
+            <input class="right" type="search" ng-model="filter_title" placeholder="search topics..."/>
+        </div>
+    </div>
+    <div class="row"> <!-- topic table -->
+        <div class="col s12">
+            <table class="striped responsive-table">
+                <thead>
+                    <th>Category</th>
+                    <th>Topic</th>
+                    <th>User Name</th>
+                    <th>Posts</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="topic in topics| filter: filter_title | orderBy: -'createdAt'">
+                        <td ng-bind="topic.category"></td>
+                        <td><a class="text_theme" href="" ng-click="goToTopic(topic._id)" ng-bind="topic.title"></a></td>
+                        <td><a class="text_theme" href="" ng-click="goToProfile(topic._user._id)" ng-bind="topic._user.name"></a></td>
+                        <td ng-bind="topic.posts.length"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> <!--end topic table -->
+    <div class="row"> <!-- add topic form -->
+        <div class="col s12 m8">
+            <h6>Add a new Topic</h6>
+            <form class="input-field card-panel">
+                <div class="row">
+                    <div class="col s4">
+                        <p>Topic:</p>
+                    </div>
+                    <div class="col s8 input-field">
+                        <input type="text" name="title" ng-model="newTopic.title"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Description:</p>
+                    </div>
+                    <div class="col s8 input-field">
+                        <textarea class="materialize-textarea" name="description" rows="8" cols="10" ng-model="newTopic.description"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Category:</p>
+                    </div>
+                    <div class="col s8 input-field">
+                        <select name="category" ng-model="newTopic.category">
+                            <option value="Ruby">Ruby</option>
+                            <option value="PHP">PHP</option>
+                            <option value="Javascript">Javascript</option>
+                            <option value="MongoDB">MongoDB</option>
+                            <option value="MySQL">MySQL</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 right">
+                            <input ng-click='addTopic()' class="btn theme_color_dark top_space" type="submit" value="Submit"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

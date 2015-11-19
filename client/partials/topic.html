@@ -1,0 +1,50 @@
+<div class="container" ng-controller="TopicController">
+    <div class="row">
+        <a href="#/dashboard"><img class="left logo" src="/images/title.gif" alt="" /></a>
+        <ul class="right top_space">
+            <li class="inline"><a class="text_theme" href="" ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col s12 m10 offset-m1">
+            <div class="card z-depth-3">
+                <h6><a class="text_theme" href="" ng-click="goToProfile(topic._user._id)"ng-bind="topic._user.name"></a> posted a topic:</h6>
+                <div class="indent">
+                    <h5 class="bold" ng-bind="topic.title"></h5>
+                    <p ng-bind="topic.description"></p>
+                </div>
+            </div>
+            <div class="row"> <!-- new post form -->
+                <div class="col s10 offset-s1">
+                    <h6 class="space"><span ng-bind="userName"></span>, post your answer here:</h6>
+                    <textarea class="materialize-textarea" name="name" rows="8" cols="10" ng-model="newPost.text"></textarea>
+                    <input class="btn theme_color_dark right" type="submit" ng-click="addPost()" name="text" value="Post"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row card-panel" ng-repeat="post in topic.posts | orderBy: -'createdAt' track by $index"> <!-- bring in all the posts for the topic-->
+        <div class="col s12 m8">
+            <p><a class="text_theme" href="" ng-click="goToProfile(post._user._id)" ng-bind="post._user.name+': '"></a><span ng-bind="post.text"></span></p>
+        </div>
+        <div class="col s12 m4">
+            <span class="green-text text-lighten-2" ng-bind="post.up + '  '"></span><a href="" ng-click="addUp(post._id)"><i class="material-icons text_theme">thumb_up</i></a>
+            <span class="red-text text-accent-4" ng-bind="post.down + '  '"></span><a href="" ng-click="addDown(post._id)"><i class="material-icons text_theme">thumb_down</i></a>
+        </div>
+        <div class="row" ng-repeat="comment in post.comments | orderBy: 'createdAt'"> <!--comments -->
+            <div class="col s11 offset-s1">
+                <p class="space"><a class="text_theme" href="" ng-click="goToProfile(comment._user._id)" ng-bind="comment._user.name + '  '"></a><span ng-bind="comment.text"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s11 offset-s1">
+                <div class="row">
+                    <div class="col s10 offset-s1">
+                        <textarea class="materialize-textarea" name="comment" rows="8" cols="10" ng-model="newComment[$index].text"></textarea>
+                        <input class="btn theme_color_dark right" type="submit" ng-click="addComment(post._id, $index)" name="text" value="Comment"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
